@@ -11,7 +11,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.deepakbaliga.bescommeeting.R;
+import com.deepakbaliga.bescommeeting.callback.OnClickMeeting;
 import com.deepakbaliga.bescommeeting.model.Meeting;
 
 import org.ocpsoft.pretty.time.PrettyTime;
@@ -29,11 +31,13 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsAdapter.Meetin
 
     private Context context;
     private List<Meeting> meetings =  new ArrayList<>();
+    private OnClickMeeting onClick;
     private int lastPosition = -1;
 
-    public MeetingsAdapter(Context context, List<Meeting> meetings) {
+    public MeetingsAdapter(Context context, List<Meeting> meetings, OnClickMeeting onClick) {
         this.context = context;
         this.meetings = meetings;
+        this.onClick = onClick;
     }
 
     @Override
@@ -44,7 +48,7 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsAdapter.Meetin
     }
 
     @Override
-    public void onBindViewHolder(MeetingViewHolder holder, int position) {
+    public void onBindViewHolder(MeetingViewHolder holder, final int position) {
 
         Meeting meeting =  meetings.get(position);
 
@@ -56,10 +60,16 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsAdapter.Meetin
         holder.getStatus().setText(meeting.getMeetingStatusName());
 
 
+        holder.getView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.clicked(position);
+            }
+        });
+
 
         String _date = meeting.getMeetingTime();
-        _date = _date.replace("T", " ");
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
 
 
         Date date = new Date();
@@ -75,6 +85,7 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsAdapter.Meetin
             holder.getDate().setText(date+"");
             e.printStackTrace();
         }
+
 
         setAnimation(holder.getView(), position);
 
@@ -112,6 +123,7 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsAdapter.Meetin
 
         private TextView name, subject, number, venue, date, status;
         private View view;
+        private MaterialRippleLayout layout;
 
         public MeetingViewHolder(View itemView) {
             super(itemView);
@@ -123,6 +135,16 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsAdapter.Meetin
             venue = (TextView) itemView.findViewById(R.id.meetingvenue);
             date = (TextView) itemView.findViewById(R.id.meetingdate);
             status = (TextView) itemView.findViewById(R.id.status);
+            layout = (MaterialRippleLayout) itemView.findViewById(R.id.ripple);
+
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClick.clicked(getLayoutPosition());
+                }
+            });
+
+
         }
 
 

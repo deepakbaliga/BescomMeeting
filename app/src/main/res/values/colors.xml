@@ -10,4 +10,14 @@
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+
+    <color name="ball1">#2196F3</color>
+    <color name="ball2">#FF4B4A</color>
+    <color name="ball3">#FFC107</color>
+
+    <integer-array name="colors">
+        <item>@color/ball1</item>
+        <item>@color/ball2</item>
+        <item>@color/ball3</item>
+    </integer-array>
 </resources>

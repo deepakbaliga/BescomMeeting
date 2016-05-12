@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:lib="http://schemas.android.com/apk/res-auto"
     tools:context="com.deepakbaliga.bescommeeting.MainActivity"
     android:background="#05000000">
 
@@ -16,6 +17,23 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:clipToPadding="false"
         />
+
+    <com.github.glomadrian.loadingballs.BallView
+        android:layout_margin="30dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        lib:balls="3"
+        lib:movement_cycle_time="2000"
+        lib:enable_size_animation="true"
+        lib:size_cycle_time="500"
+        lib:min_ball_size="5dp"
+        lib:max_ball_size="12dp"
+        lib:ball_colors="@array/colors"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        />
+
 
 
 </RelativeLayout>

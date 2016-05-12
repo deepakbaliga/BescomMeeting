@@ -1,18 +1,25 @@
 package com.deepakbaliga.bescommeeting;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deepakbaliga.bescommeeting.Adapter.MeetingsAdapter;
+import com.deepakbaliga.bescommeeting.callback.DetailsCallback;
 import com.deepakbaliga.bescommeeting.callback.MeetingsCallback;
+import com.deepakbaliga.bescommeeting.callback.OnClickMeeting;
 import com.deepakbaliga.bescommeeting.model.Meeting;
+import com.deepakbaliga.bescommeeting.model.MeetingDetail;
 import com.deepakbaliga.bescommeeting.retrofit.APIAdapter;
+import com.github.glomadrian.loadingballs.BallView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private APIAdapter apiAdapter;
     private MeetingsAdapter adapter;
     private List<Meeting> meetings =  new ArrayList<>();
-
+    private BallView ballView;
+    private OnClickMeeting onClickMeeting;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +53,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
+        ballView = (BallView) findViewById(R.id.progress);
 
+        onClickMeeting = new OnClickMeeting() {
+            @Override
+            public void clicked(int position) {
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                intent.putExtra("id", meetings.get(position).getMeetingCode());
+                startActivity(intent);
+            }
+        };
 
         loadData();
 
@@ -54,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
     private void loadData(){
         apiAdapter.getMeetings(new MeetingsCallback() {
             @Override
-            public void onSuccess(List<Meeting> meetings) {
-                adapter =  new MeetingsAdapter(MainActivity.this, meetings);
-                recyclerView.setAdapter(adapter);
+            public void onSuccess(List<Meeting> _meetings) {
+                ballView.stop();
+                ballView.setVisibility(View.GONE);
 
+                meetings = _meetings;
+                adapter =  new MeetingsAdapter(MainActivity.this, meetings, onClickMeeting);
+                recyclerView.setAdapter(adapter);
 
 
             }
@@ -65,7 +85,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailed(String error) {
                 Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+                ballView.stop();
+                ballView.setVisibility(View.GONE);
             }
         });
     }
+
+
+
 }

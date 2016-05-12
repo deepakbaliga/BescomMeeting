@@ -29,7 +29,7 @@ android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content"
-            android:text="Meeting Name"
+            android:text=""
             android:textStyle="bold"
             android:textColor="#000"
             android:textSize="20sp"
@@ -39,7 +39,7 @@ android:layout_height="wrap_content"
         <TextView
             android:id="@+id/status"
             android:layout_alignParentRight="true"
-            android:text="Status"
+            android:text="\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:paddingBottom="4dp"
@@ -86,7 +86,7 @@ android:layout_height="wrap_content"
             android:id="@+id/meetingsubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meeting Name"
+            android:text=""
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -111,7 +111,7 @@ android:layout_height="wrap_content"
             android:id="@+id/meetingnumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Code 001/56 - Mar 2016"
+            android:text=""
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -136,7 +136,7 @@ android:layout_height="wrap_content"
             android:id="@+id/meetingvenue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BESCOM Board Room"
+            android:text=""
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -162,7 +162,7 @@ android:layout_height="wrap_content"
             android:id="@+id/meetingdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sunday March 12"
+            android:text=""
             android:textSize="16sp"/>
     </LinearLayout>
 </RelativeLayout>
