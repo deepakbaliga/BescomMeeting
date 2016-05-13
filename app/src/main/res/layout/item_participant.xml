@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="4dp"
-    app:cardElevation="4dp">
+    app:cardElevation="2dp"
+    android:layout_marginBottom="10dp">
 
 
     <com.balysv.materialripple.MaterialRippleLayout
@@ -24,7 +25,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:src="@drawable/ic_person"
-        android:tint="#eeffffff"
+        android:tint="#ffffff"
         android:background="@drawable/circle"/>
 
         <LinearLayout
@@ -53,11 +54,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/dark_round_corner"
                     android:text=""
-                    android:textColor="#fff"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="4dp"/>
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"/>
 
                 <TextView
                     android:id="@+id/attendance"
@@ -65,13 +67,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/dark_round_corner"
                     android:text=""
-                    android:textColor="#fff"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/mandatory"
-                    android:paddingTop="4dp"/>
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"/>
 
             </RelativeLayout>
         </LinearLayout>

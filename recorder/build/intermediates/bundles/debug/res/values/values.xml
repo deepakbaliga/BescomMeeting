@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <integer-array name="colors">
+        <item>@color/ball1</item>
+        <item>@color/ball2</item>
+        <item>@color/ball3</item>
+    </integer-array>
+    <color name="ball1">#2196F3</color>
+    <color name="ball2">#FF4B4A</color>
+    <color name="ball3">#FFC107</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <string name="app_name">Sound Recorder</string>
+    <string name="recorder_event_activity_label">Record a Sound</string>
+    <string name="timer_format" translatable="false"><ns1:g id="format">%02d:%02d.%02d</ns1:g></string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+    <style name="bescomstyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+    </style>
+</resources>

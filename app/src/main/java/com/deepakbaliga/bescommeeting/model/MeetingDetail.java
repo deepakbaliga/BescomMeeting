@@ -19,7 +19,30 @@ public class MeetingDetail {
     @SerializedName("Agenda")
     private List<Agenda> agendas = new ArrayList<>();
 
+    @SerializedName("Minutes")
+    private List<Minute> minutes =  new ArrayList<>();
+
+    @SerializedName("ToDoList")
+    private List<Todo> todos =  new ArrayList<>();
+
     public MeetingDetail() {
+    }
+
+
+    public List<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<Todo> todos) {
+        this.todos = todos;
+    }
+
+    public List<Minute> getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(List<Minute> minutes) {
+        this.minutes = minutes;
     }
 
     public Meeting getMeeting() {

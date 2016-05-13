@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Meetings");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         apiAdapter =  new APIAdapter();
         linearLayoutManager =  new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -90,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

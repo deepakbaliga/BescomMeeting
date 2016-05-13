@@ -3,6 +3,7 @@ package com.deepakbaliga.bescommeeting.retrofit;
 import com.deepakbaliga.bescommeeting.model.Meeting;
 import com.deepakbaliga.bescommeeting.model.MeetingDetail;
 import com.deepakbaliga.bescommeeting.model.Meetings;
+import com.deepakbaliga.bescommeeting.model.User;
 
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("meeting")
     Call<MeetingDetail> getDetails(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<User> login(@Field("username") String username, @Field("password") String password);
 }

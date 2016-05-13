@@ -1,25 +1,34 @@
 package com.deepakbaliga.bescommeeting;
 
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.tonyatkins.recorder.activity.RecordSoundActivity;
 import com.deepakbaliga.bescommeeting.Adapter.ViewPagerAdapter;
 import com.deepakbaliga.bescommeeting.callback.DetailsCallback;
 import com.deepakbaliga.bescommeeting.fragments.AgendaFragment;
+import com.deepakbaliga.bescommeeting.fragments.ChooseSubjectDialog;
 import com.deepakbaliga.bescommeeting.fragments.MinutesFragment;
 import com.deepakbaliga.bescommeeting.fragments.ParticipantsFragment;
 import com.deepakbaliga.bescommeeting.fragments.TodoFragment;
 import com.deepakbaliga.bescommeeting.model.Meeting;
 import com.deepakbaliga.bescommeeting.model.MeetingDetail;
+import com.deepakbaliga.bescommeeting.model.RecordDetail;
 import com.deepakbaliga.bescommeeting.retrofit.APIAdapter;
 
 import java.text.ParseException;
@@ -33,10 +42,12 @@ public class DetailsActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private CoordinatorLayout coordinatorLayout;
     private ViewPager viewPager;
-
+    private RelativeLayout relativeLayout;
+    private ProgressBar progressBar;
     private int id;
     private APIAdapter apiAdapter;
     private MeetingDetail detail;
+    private int request_Code = 1001;
 
     private TextView name, subject, number, venue, date, status;
 
@@ -67,11 +78,15 @@ public class DetailsActivity extends AppCompatActivity {
 
                     setMeetingDetail(detail.getMeeting());
                     setUpComponents();
+                    relativeLayout.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+
                 }
 
                 @Override
                 public void onFailed(String error) {
                     Toast.makeText(DetailsActivity.this, error, Toast.LENGTH_SHORT).show();
+
                 }
             });
     }
@@ -84,7 +99,9 @@ public class DetailsActivity extends AppCompatActivity {
         venue = (TextView) findViewById(R.id.meetingvenue);
         date = (TextView) findViewById(R.id.meetingdate);
         status = (TextView) findViewById(R.id.status);
-
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+        relativeLayout = (RelativeLayout) findViewById(R.id.relative_layout);
+        relativeLayout.setVisibility(View.INVISIBLE);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -155,13 +172,25 @@ public class DetailsActivity extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFrag(new ParticipantsFragment(), "Participants");
-        adapter.addFrag(new AgendaFragment(), "Agenda");
-        adapter.addFrag(new MinutesFragment(), "Minutes");
-        adapter.addFrag(new TodoFragment(), "TODO");
+        ParticipantsFragment participantsFragment =  new ParticipantsFragment();
+        participantsFragment.setParticipants(detail.getParticipants());
+        adapter.addFrag(participantsFragment, "Participants");
+
+        AgendaFragment agendaFragment =  new AgendaFragment();
+        agendaFragment.setAgendas(detail.getAgendas());
+        adapter.addFrag(agendaFragment, "Agenda");
+
+        MinutesFragment minutesFragment =  new MinutesFragment();
+        minutesFragment.setMinutes(detail.getMinutes());
+        adapter.addFrag(minutesFragment, "Minutes");
+
+        TodoFragment todoFragment =  new TodoFragment();
+        todoFragment.setTodos(detail.getTodos());
+        adapter.addFrag(todoFragment, "TODO");
+
+
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
 
 
     }
@@ -175,6 +204,34 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void conductMeeting(View view){
+
+        ChooseSubjectDialog dialog =  new ChooseSubjectDialog();
+        dialog.setAgendas(detail.getAgendas());
+        RecordDetail recordDetail =  new RecordDetail();
+        recordDetail.setMeetingCode(detail.getMeeting().getMeetingCode());
+        recordDetail.setMeetingSubject(detail.getMeeting().getSubject());
+
+        dialog.setRecordDetail(recordDetail);
+
+        FragmentManager fm = getSupportFragmentManager();
+        dialog.show(fm, "select");
+
+        /*
+        Intent recordSoundIntent = new Intent(this, RecordSoundActivity.class);
+        recordSoundIntent.putExtra(RecordSoundActivity.FILE_NAME_KEY, detail.getMeeting().getMeetingName());
+
+        startActivityForResult(recordSoundIntent, request_Code);*/
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == request_Code) {
+            if (resultCode == RESULT_OK) {
+                String returnedResult = data.getData().toString();
+                Log.e("Record", returnedResult);
+            }
+        }
     }
 
 }

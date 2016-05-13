@@ -41,4 +41,18 @@ dependencies {
     compile 'org.ocpsoft.prettytime:prettytime:1.0.8.Final'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.github.glomadrian:loadingballs:1.1@aar'
+    compile project(':recorder')
+
+
 }
+
+repositories {
+    maven { url "http://dl.bintray.com/pixplicity/maven" }
+}
+dependencies {
+    compile 'com.pixplicity.easyprefs:library:1.8.1@aar'
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
+}
+

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/record_sound"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <com.blogspot.tonyatkins.recorder.views.RecorderTimerView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/timerView"
+        style="@android:style/TextAppearance.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center"
+        android:text="00:00.00"
+        android:textSize="72dp" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" >
+
+        <ImageButton
+            android:id="@+id/record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:src="@drawable/record" />
+
+        <ImageButton
+            android:id="@+id/play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:src="@android:drawable/ic_media_play"
+            android:tint="@color/colorAccent"/>
+
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:src="@drawable/stop" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_above="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:text="Record"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:gravity="center"
+            android:background="@color/colorPrimaryDark"
+            />
+
+        <TextView
+            android:text="Play    "
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:paddingTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/colorPrimaryDark"
+            />
+        <TextView
+            android:paddingTop="10dp"
+            android:text="Stop   "
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/RecordingStatusBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear"
+        android:layout_margin="10dip"
+        android:orientation="vertical"
+
+        app:cardElevation="2dp"
+        app:cardCornerRadius="4dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/RecordingStatusText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#000"/>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/RecordingStatusButtonBlock"
+            android:visibility="invisible"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/edit_sound_cancel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_marginRight="2dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <Button
+                android:id="@+id/edit_sound_save"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:background="@color/colorPrimaryDark"/>
+        </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <com.blogspot.tonyatkins.recorder.views.VolumeBarGraphView
+        android:id="@+id/volumeBarGraphView"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dip"
+        android:layout_weight="1" />
+
+</RelativeLayout>

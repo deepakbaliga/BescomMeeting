@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.deepakbaliga.bescommeeting.App;
 import com.deepakbaliga.bescommeeting.callback.DetailsCallback;
+import com.deepakbaliga.bescommeeting.callback.Login;
 import com.deepakbaliga.bescommeeting.callback.MeetingsCallback;
 import com.deepakbaliga.bescommeeting.model.Meeting;
 import com.deepakbaliga.bescommeeting.model.MeetingDetail;
 import com.deepakbaliga.bescommeeting.model.Meetings;
+import com.deepakbaliga.bescommeeting.model.User;
 
 import java.util.List;
 
@@ -67,6 +69,28 @@ public class APIAdapter {
             @Override
             public void onFailure(Call<MeetingDetail> call, Throwable t) {
                 callback.onFailed(t.getMessage());
+            }
+        });
+    }
+
+
+    public void login(String username, String password, final Login callback){
+        Call<User> call = endPoints.login(username, password);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(!(response.code()==404))
+                    callback.success(response.body());
+                else
+                    callback.failed(response.message());
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.failed(t.getMessage());
             }
         });
     }
