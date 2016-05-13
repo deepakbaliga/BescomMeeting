@@ -48,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
     private APIAdapter apiAdapter;
     private MeetingDetail detail;
     private int request_Code = 1001;
+    private ChooseSubjectDialog dialog =  new ChooseSubjectDialog();
 
     private TextView name, subject, number, venue, date, status;
 
@@ -207,7 +208,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
     public void conductMeeting(View view){
 
-        ChooseSubjectDialog dialog =  new ChooseSubjectDialog();
+
         dialog.setAgendas(detail.getAgendas());
         RecordDetail recordDetail =  new RecordDetail();
         recordDetail.setMeetingCode(detail.getMeeting().getMeetingCode());
@@ -218,11 +219,6 @@ public class DetailsActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         dialog.show(fm, "select");
 
-        /*
-        Intent recordSoundIntent = new Intent(this, RecordSoundActivity.class);
-        recordSoundIntent.putExtra(RecordSoundActivity.FILE_NAME_KEY, detail.getMeeting().getMeetingName());
-
-        startActivityForResult(recordSoundIntent, request_Code);*/
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -230,6 +226,12 @@ public class DetailsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String returnedResult = data.getData().toString();
                 Log.e("Record", returnedResult);
+                Log.e("Record", dialog.getRecordDetail().getSubjectCode());
+                Log.e("Record", dialog.getRecordDetail().getSubjectAgendaNumber());
+                Log.e("Record", dialog.getRecordDetail().getSubjectName());
+                Log.e("Record", dialog.getRecordDetail().getMeetingCode());
+                Log.e("Record", dialog.getRecordDetail().getMeetingSubject());
+
             }
         }
     }

@@ -129,7 +129,7 @@ public class VolumeBarGraphView extends View {
 				}
 				float startX = minX + margin + (a * (pillWidth + margin));
 				RectF rect = new RectF(startX, minY, startX + pillWidth, maxY);
-				canvas.drawRoundRect(rect, radius, radius, pillPaint);
+				canvas.drawRoundRect(rect, radius/2, radius/2, pillPaint);
 			}
 		}
 		// portrait
@@ -147,7 +147,7 @@ public class VolumeBarGraphView extends View {
 				}
 				float startY = minY + margin + (a * (pillHeight + margin));
 				RectF rect = new RectF(minX, startY, maxX, startY+pillHeight);
-				canvas.drawRoundRect(rect, radius, radius, pillPaint);
+				canvas.drawRoundRect(rect, radius/2, radius/2, pillPaint);
 			}
 		}
 	}

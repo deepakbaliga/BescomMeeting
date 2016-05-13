@@ -2,6 +2,8 @@ package com.deepakbaliga.bescommeeting.fragments;
 
 
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.blogspot.tonyatkins.recorder.activity.RecordSoundActivity;
 import com.deepakbaliga.bescommeeting.Adapter.ChooseAgendaAdapter;
 import com.deepakbaliga.bescommeeting.R;
 import com.deepakbaliga.bescommeeting.callback.OnClickMeeting;
@@ -34,9 +37,15 @@ public class ChooseSubjectDialog extends DialogFragment {
     private RecordDetail recordDetail =  new RecordDetail();
     private List<Agenda> agendas =  new ArrayList<>();
     private ChooseAgendaAdapter adapter;
-
+    private int request_Code = 1001;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+
+    public RecordDetail getRecordDetail() {
+        return recordDetail;
+    }
+
+
     public ChooseSubjectDialog() {
         // Required empty public constructor
     }
@@ -65,6 +74,15 @@ public class ChooseSubjectDialog extends DialogFragment {
             @Override
             public void clicked(int position) {
                 Log.e("Selected", "clicked: "+position );
+
+                recordDetail.setSubjectAgendaNumber(agendas.get(position).getSubjectAgendaNumber());
+                recordDetail.setSubjectCode(agendas.get(position).getSubjectCode());
+                recordDetail.setSubjectName(agendas.get(position).getSubjectName());
+
+                Intent recordSoundIntent = new Intent(getActivity(), RecordSoundActivity.class);
+                recordSoundIntent.putExtra(RecordSoundActivity.FILE_NAME_KEY, recordDetail.getMeetingSubject()+"-"+System.currentTimeMillis() / 1000L);
+
+                getActivity().startActivityForResult(recordSoundIntent, request_Code);
             }
         });
 
@@ -92,5 +110,14 @@ public class ChooseSubjectDialog extends DialogFragment {
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("File", requestCode+" "+resultCode);
+        if (requestCode == request_Code) {
+            if (resultCode == request_Code) {
+                String returnedResult = data.getData().toString();
+                Log.e("Files", returnedResult);
+            }
+        }
+    }
 
 }

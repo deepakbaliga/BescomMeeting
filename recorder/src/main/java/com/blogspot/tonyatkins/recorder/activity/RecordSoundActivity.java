@@ -118,7 +118,7 @@ public class RecordSoundActivity extends AppCompatActivity {
 			}
 		}
 		
-		soundFilePath = soundDirectory + "/" + soundFileName + ".mp4";
+		soundFilePath = soundDirectory + "/" + soundFileName + ".mp3";
 		
 		// check to see if there's an existing file name and add a numeral until there's no conflict.
 		File soundFile = new File(soundFilePath);
@@ -126,7 +126,7 @@ public class RecordSoundActivity extends AppCompatActivity {
 			int suffix = 1;
 			
 			while (soundFile.exists()) {
-				soundFile = new File(soundFilePath.replace(".mp4", "-" + suffix + ".mp4"));
+				soundFile = new File(soundFilePath.replace(".mp3", "-" + suffix + ".mp3"));
 				suffix++;
 			}
 			
@@ -153,13 +153,15 @@ public class RecordSoundActivity extends AppCompatActivity {
 		recordingStatusButtonBlock = (LinearLayout) findViewById(R.id.RecordingStatusButtonBlock);
 		recordingStatusButtonBlock.setVisibility(View.INVISIBLE);
 		recordingStatusText = (TextView) findViewById(R.id.RecordingStatusText);
-		recordingStatusText.setText("No sound data.  Press 'Record' to start recording.");
+		recordingStatusText.setText("Press 'Record' to start recording.");
 
 		RecorderTimerView timerView = (RecorderTimerView) findViewById(R.id.timerView);
 		timerView.setRecorder(recorder);
 		
 		VolumeBarGraphView volumeBarGraphView = (VolumeBarGraphView) findViewById(R.id.volumeBarGraphView);
 		volumeBarGraphView.setRecorder(recorder);
+
+
 		
 		// Grab the handles of our buttons
 		playButton = (ImageButton) findViewById(R.id.play_button);
@@ -183,6 +185,7 @@ public class RecordSoundActivity extends AppCompatActivity {
 			// disable the play and save buttons
 			playButton.setOnClickListener(null);
 			saveButton.setOnClickListener(null);
+            recordingStatusText.setText("Recording...");
 			
 			try {
 				v.setOnClickListener(new StopRecordingListener());
@@ -216,7 +219,7 @@ public class RecordSoundActivity extends AppCompatActivity {
 					mediaPlayer.prepare();
 
 					playButton.setOnClickListener(new PlayRecordingListener());
-					recordingStatusText.setText("Recorded " + mediaPlayer.getDuration()/1000d + " seconds of audio.  Press 'Record' to start again, 'Play' to preview, 'Save' to finish, or 'Cancel' to exit.");
+					recordingStatusText.setText("Recorded " + mediaPlayer.getDuration()/1000d + " seconds of audio.'Play' to preview, 'Save' to finish, or 'Cancel' to exit.");
 					recordingStatusButtonBlock.setVisibility(View.VISIBLE);
 				} catch (Exception e) {
 					recordingStatusText.setText("Can't setup preview playback:" + e.getMessage());
