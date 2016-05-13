@@ -20,6 +20,7 @@ import com.deepakbaliga.bescommeeting.callback.MeetingsCallback;
 import com.deepakbaliga.bescommeeting.callback.OnClickMeeting;
 import com.deepakbaliga.bescommeeting.model.Meeting;
 import com.deepakbaliga.bescommeeting.model.MeetingDetail;
+import com.deepakbaliga.bescommeeting.model.RecordDetail;
 import com.deepakbaliga.bescommeeting.retrofit.APIAdapter;
 import com.github.glomadrian.loadingballs.BallView;
 
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
                 ballView.setVisibility(View.GONE);
             }
         });
+    }
+
+    public void recordings(View view){
+
+        startActivity(new Intent(MainActivity.this, RecordActivity.class));
     }
 
 

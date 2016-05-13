@@ -35,6 +35,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.realm.Realm;
+
 public class DetailsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -50,6 +52,8 @@ public class DetailsActivity extends AppCompatActivity {
     private int request_Code = 1001;
     private ChooseSubjectDialog dialog =  new ChooseSubjectDialog();
 
+    private Realm myRealm ;
+
     private TextView name, subject, number, venue, date, status;
 
     @Override
@@ -62,6 +66,7 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         apiAdapter = new APIAdapter();
+        myRealm = Realm.getDefaultInstance();
 
         if(getIntent().getExtras()!=null){
             id = Integer.parseInt(getIntent().getExtras().getString("id"));
@@ -102,7 +107,7 @@ public class DetailsActivity extends AppCompatActivity {
         status = (TextView) findViewById(R.id.status);
         progressBar = (ProgressBar) findViewById(R.id.progress);
         relativeLayout = (RelativeLayout) findViewById(R.id.relative_layout);
-        relativeLayout.setVisibility(View.INVISIBLE);
+        relativeLayout.setVisibility(View.VISIBLE);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -231,6 +236,16 @@ public class DetailsActivity extends AppCompatActivity {
                 Log.e("Record", dialog.getRecordDetail().getSubjectName());
                 Log.e("Record", dialog.getRecordDetail().getMeetingCode());
                 Log.e("Record", dialog.getRecordDetail().getMeetingSubject());
+
+                myRealm.beginTransaction();
+                RecordDetail recordDetail = myRealm.createObject(RecordDetail.class);
+                recordDetail.setSubjectName(dialog.getRecordDetail().getSubjectName());
+                recordDetail.setSubjectCode(dialog.getRecordDetail().getSubjectCode());
+                recordDetail.setSubjectAgendaNumber(dialog.getRecordDetail().getSubjectAgendaNumber());
+                recordDetail.setMeetingCode(dialog.getRecordDetail().getMeetingCode());
+                recordDetail.setMeetingSubject(dialog.getRecordDetail().getMeetingSubject());
+                recordDetail.setFile(returnedResult);
+                myRealm.commitTransaction();
 
             }
         }

@@ -71,7 +71,13 @@
     android:id="@+id/relative_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="#fff">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -79,6 +85,18 @@
         android:layout_height="56dp"
         android:indeterminate="true"
         android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress"
+        android:text="Loading Meeting"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"
+
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
 

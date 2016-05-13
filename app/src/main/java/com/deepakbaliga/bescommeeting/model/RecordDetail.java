@@ -4,15 +4,17 @@ import java.io.Serializable;
 
 import javax.security.auth.Subject;
 
+import io.realm.RealmObject;
+
 /**
  * Created by baliga on 13/05/16.
  */
-public class RecordDetail implements Serializable {
+public class RecordDetail extends RealmObject {
 
     private String subjectAgendaNumber;
     private String SubjectCode;
     private String SubjectName;
-
+    private String file;
     private String meetingCode;
     private String meetingSubject;
 
@@ -25,6 +27,14 @@ public class RecordDetail implements Serializable {
 
     public void setSubjectAgendaNumber(String subjectAgendaNumber) {
         this.subjectAgendaNumber = subjectAgendaNumber;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getSubjectCode() {
