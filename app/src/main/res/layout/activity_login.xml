@@ -62,6 +62,7 @@
 
     <Button
         android:text="Login"
+        android:id="@+id/login_button"
         android:textColor="#fff"
         android:textStyle="bold"
         android:layout_below="@+id/password"

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.pixplicity.easyprefs.library.Prefs;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private Button buttonLogin;
     private EditText username, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        buttonLogin = (Button) findViewById(R.id.login_button);
 
         if(Prefs.getBoolean("loggedin",false)){
 
@@ -33,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view){
 
+        buttonLogin.setText("Logging you in...");
         String sUsername = username.getText().toString();
         if (sUsername.matches("")) {
             Toast.makeText(this, "You did not enter a username", Toast.LENGTH_SHORT).show();
@@ -64,8 +68,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
                 Prefs.putBoolean("loggedin",true);
+                buttonLogin.setText("Try Again");
             }
         });
+
 
 
     }
