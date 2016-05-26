@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/deepakbaliga/development/freelancing/bescom/BescomMeeting/recorder/build/intermediates/res/merged/androidTest/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/deepakbaliga/development/freelancing/bescom/BescomMeeting/recorder/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
         "merged": "/Users/deezdroid/Development/freelancing/bescom/BescomMeeting/recorder/build/intermediates/res/merged/androidTest/debug/color-v23/abc_color_highlight_material.xml",
         "source": "/Users/deezdroid/Development/freelancing/bescom/BescomMeeting/recorder/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/color-v23/abc_color_highlight_material.xml"
     }

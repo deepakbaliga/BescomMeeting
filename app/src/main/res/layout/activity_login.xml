@@ -42,6 +42,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:hint="Username"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
         android:textSize="18sp"
         android:textColorHint="@color/colorPrimaryDark"
         />

@@ -39,6 +39,7 @@ public class APIAdapter {
     }
 
     public void getMeetings(final MeetingsCallback callback){
+
         Call<Meetings> call = endPoints.getMeetings();
 
         call.enqueue(new Callback<Meetings>() {
